@@ -1,0 +1,1 @@
+# Magazik-compudakteriv
