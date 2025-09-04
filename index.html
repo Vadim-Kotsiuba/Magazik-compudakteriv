@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Магазин комплектуючих ПК</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <h1>Магазин комплектуючих ПК</h1>
+    <p>Процесори, відеокарти, SSD, блоки живлення та інше</p>
+    <div class="search-box">
+      <input type="text" id="search" placeholder="🔍 Пошук товарів...">
+    </div>
+  </header>
+
+  <nav>
+    <a href="#">Головна</a>
+    <a href="#">Каталог</a>
+    <a href="#">Кошик</a>
+    <a href="#">Контакти</a>
+  </nav>
+
+  <main class="container" id="products">
+    <div class="product">
+      <img src="https://content.rozetka.com.ua/goods/images/big/397444905.jpg" alt="CPU">
+      <h3>Процесор Intel i7</h3>
+      <p class="price">10 500 ₴</p>
+      <a href="#" class="btn">У кошик</a>
+    </div>
+
+    <div class="product">
+      <img src="https://content.rozetka.com.ua/goods/images/big/590276666.jpg" alt="GPU">
+      <h3>Відеокарта RTX 4070</h3>
+      <p class="price">28 900 ₴</p>
+      <a href="#" class="btn">У кошик</a>
+    </div>
+
+    <div class="product">
+      <img src="https://m.media-amazon.com/images/I/A1sHjPpz6fL._AC_UL640_FMwebp_QL65_.jpg" alt="SSD">
+      <h3>SSD Samsung 1TB</h3>
+      <p class="price">3 200 ₴</p>
+      <a href="#" class="btn">У кошик</a>
+    </div>
+
+    <div class="product">
+      <img src="https://content1.rozetka.com.ua/goods/images/big/462444987.jpg" alt="PSU">
+      <h3>Блок живлення 650W</h3>
+      <p class="price">2 500 ₴</p>
+      <a href="#" class="btn">У кошик</a>
+    </div>  
+
+    <div class="product">
+      <img src="https://content2.rozetka.com.ua/goods/images/big_tile/25228755.png" alt="Motherboard">
+      <h3>Материнська плата ASUS B550</h3>
+      <p class="price">5 800 ₴</p>
+      <a href="#" class="btn">У кошик</a>
+    </div>
+   
+    <div class="product">
+      <img src="https://m.media-amazon.com/images/I/719RKrjaQqL._AC_UL640_FMwebp_QL65_.jpg" alt="RAM">
+      <h3>Оперативна пам'ять 16GB DDR4</h3>
+      <p class="price">2 700 ₴</p>
+      <a href="#" class="btn">У кошик</a>
+    </div>
+    
+    <div class="product">
+      <img src="https://content.rozetka.com.ua/goods/images/big_tile/310426279.jpg" alt="Case">
+      <h3>Корпус ATX з підсвіткою</h3>
+      <p class="price">2 200 ₴</p>
+      <a href="#" class="btn">У кошик</a>
+    </div>
+  
+    <div class="product">
+      <img src="https://media.ldlc.com/r705/ld/products/00/06/26/77/LD0006267720.jpg" alt="Cooler">
+      <h3>Система охолодження Cooler Master</h3>
+      <p class="price">1 400 ₴</p>
+      <a href="#" class="btn">У кошик</a>
+    </div>
+  
+    <div class="product">
+      <img src="https://m.media-amazon.com/images/I/71XJddtuqmL._AC_UL640_FMwebp_QL65_.jpg" alt="Monitor">
+      <h3>Монітор 27″ IPS 144Hz</h3>
+      <p class="price">9 500 ₴</p>
+      <a href="#" class="btn">У кошик</a>
+    </div>
+ 
+    <div class="product">
+      <img src="https://content1.rozetka.com.ua/goods/images/big/545376638.png" alt="Keyboard">
+      <h3>Механічна клавіатура</h3>
+      <p class="price">1 800 ₴</p>
+      <a href="#" class="btn">У кошик</a>
+    </div>
+ 
+    <div class="product">
+      <img src="https://img.kwcdn.com/product/fancy/486698e4-2b9d-4e0a-9a8b-0dedac9ed296.jpg?imageView2/2/w/800/q/70/format/webp" alt="Mouse">
+      <h3>Ігрова миша RGB</h3>
+      <p class="price">1 200 ₴</p>
+      <a href="#" class="btn">У кошик</a>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2025 Магазин комплектуючих ПК. Всі права захищено.</p>
+  </footer>
+
+  <script>
+    // Живий пошук
+    const searchInput = document.getElementById("search");
+    const products = document.querySelectorAll(".product");
+
+    searchInput.addEventListener("keyup", function() {
+      let query = this.value.toLowerCase();
+      products.forEach(product => {
+        let name = product.querySelector("h3").textContent.toLowerCase();
+        if (name.includes(query)) {
+          product.style.display = "flex"; // щоб flex працював
+        } else {
+          product.style.display = "none";
+        }
+      });
+    });
+  </script>
+</body>
+</html>
