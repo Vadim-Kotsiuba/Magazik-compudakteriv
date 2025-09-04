@@ -22,6 +22,33 @@
     <a href="#">Кошик</a>
     <a href="#">Контакти</a>
   </nav>
+<div class="sidebar" id="sidebar">
+  <h2>Фільтри</h2>
+  
+  <div class="filter-group">
+    <h4>Категорії</h4>
+    <label><input type="checkbox" value="процесор"> Процесори</label><br>
+    <label><input type="checkbox" value="відеокарта"> Відеокарти</label><br>
+    <label><input type="checkbox" value="ssd"> SSD</label><br>
+    <label><input type="checkbox" value="материнська плата"> Материнські плати</label><br>
+    <label><input type="checkbox" value="оперативна пам"> Оперативна пам’ять</label>
+  </div>
+
+  <div class="filter-group">
+    <h4>Ціна</h4>
+    <input type="range" min="1000" max="30000" step="500" value="15000" id="priceRange">
+    <p>Макс. ціна: <span id="priceValue">15000</span> ₴</p>
+  </div>
+
+  <div class="filter-group">
+    <h4>Сортування за ціною</h4>
+    <select id="sort">
+      <option value="default">За замовчуванням</option>
+      <option value="asc">Від дешевих до дорогих</option>
+      <option value="desc">Від дорогих до дешевих</option>
+    </select>
+  </div>
+</div>
 
   <main class="container" id="products">
     <div class="product">
@@ -105,23 +132,73 @@
   <footer>
     <p>© 2025 Магазин комплектуючих ПК. Всі права захищено.</p>
   </footer>
-
-  <script>
-    // Живий пошук
-    const searchInput = document.getElementById("search");
-    const products = document.querySelectorAll(".product");
-
-    searchInput.addEventListener("keyup", function() {
-      let query = this.value.toLowerCase();
-      products.forEach(product => {
-        let name = product.querySelector("h3").textContent.toLowerCase();
-        if (name.includes(query)) {
-          product.style.display = "flex"; // щоб flex працював
-        } else {
-          product.style.display = "none";
-        }
-      });
-    });
-  </script>
 </body>
+<script>
+// ======= Елементи =======
+const searchInput = document.getElementById("search");
+const sortSelect = document.getElementById("sort");
+const priceRange = document.getElementById("priceRange");
+const priceValue = document.getElementById("priceValue");
+const checkboxes = document.querySelectorAll(".sidebar input[type=checkbox]");
+const productContainer = document.getElementById("products");
+const productCards = Array.from(productContainer.querySelectorAll(".product"));
+
+// ======= Події =======
+searchInput.addEventListener("keyup", renderProducts);
+sortSelect.addEventListener("change", renderProducts);
+priceRange.addEventListener("input", () => {
+  priceValue.textContent = priceRange.value;
+  renderProducts();
+});
+checkboxes.forEach(ch => ch.addEventListener("change", renderProducts));
+
+// ======= Основна функція =======
+function renderProducts() {
+  let query = searchInput.value.toLowerCase();
+  let selectedCategories = Array.from(checkboxes)
+    .filter(ch => ch.checked)
+    .map(ch => ch.value.toLowerCase());
+
+  let maxPrice = parseInt(priceRange.value);
+
+  // Фільтрація
+  productCards.forEach(product => {
+    let name = product.querySelector("h3").textContent.toLowerCase();
+    let price = parseInt(product.querySelector(".price").textContent.replace(/\D/g, ""));
+
+    let matchesSearch = name.includes(query);
+    let matchesCategory = selectedCategories.length === 0 || 
+                          selectedCategories.some(cat => name.includes(cat));
+    let matchesPrice = price <= maxPrice;
+
+    if (matchesSearch && matchesCategory && matchesPrice) {
+      product.style.display = "flex";  // показати картку
+    } else {
+      product.style.display = "none";  // сховати
+    }
+  });
+
+  // Сортування тільки серед тих, що відображаються
+  let visibleProducts = productCards.filter(p => p.style.display !== "none");
+
+  if (sortSelect.value === "asc") {
+    visibleProducts.sort((a, b) => {
+      return parseInt(a.querySelector(".price").textContent.replace(/\D/g, "")) -
+             parseInt(b.querySelector(".price").textContent.replace(/\D/g, ""));
+    });
+  } else if (sortSelect.value === "desc") {
+    visibleProducts.sort((a, b) => {
+      return parseInt(b.querySelector(".price").textContent.replace(/\D/g, "")) -
+             parseInt(a.querySelector(".price").textContent.replace(/\D/g, ""));
+    });
+  }
+
+  // Переставляємо товари в контейнер
+  visibleProducts.forEach(product => productContainer.appendChild(product));
+}
+
+// ======= Запуск при завантаженні =======
+renderProducts();
+
+</script>
 </html>
