@@ -7,198 +7,421 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
+  <!-- ===== ХЕДЕР ===== -->
   <header>
-    <h1>Магазин комплектуючих до ПК</h1>
-    <p>Процесори, відеокарти, SSD, блоки живлення та інше</p>
+    <h1>Магазин комплектуючих ПК</h1>
+    <p>Все для вашого ідеального комп'ютера</p>
     <div class="search-box">
-      <input type="text" id="search" placeholder="🔍 Пошук товарів...">
+      <input type="text" id="searchInput" placeholder="Пошук товарів...">
     </div>
   </header>
 
+  <!-- ===== НАВІГАЦІЯ ===== -->
   <nav>
-    <a href="#">Головна</a>
-    <a href="#">Каталог</a>
-    <a href="#">Кошик</a>
-    <a href="#">Контакти</a>
-  </nav>
-<div class="sidebar" id="sidebar">
-  <h2>Фільтри</h2>
+  <a href="#">Головна</a>
+  <a href="#" id="faqBtn">FAQ</a>
+  <button id="contactBtn" class="header-btn">Контакти</button>
   
-  <div class="filter-group">
-    <h4>Категорії</h4>
-    <label><input type="checkbox" value="процесор"> Процесори</label><br>
-    <label><input type="checkbox" value="відеокарта"> Відеокарти</label><br>
-    <label><input type="checkbox" value="ssd"> SSD</label><br>
-    <label><input type="checkbox" value="материнська плата"> Материнські плати</label><br>
-    <label><input type="checkbox" value="оперативна пам"> Оперативна пам’ять</label>
+  <!-- Кнопка корзини -->
+  <div class="cart-icon" id="cartBtn">
+    🛒 <span id="cartCount">0</span>
   </div>
-
-  <div class="filter-group">
-    <h4>Ціна</h4>
-    <input type="range" min="1000" max="30000" step="500" value="15000" id="priceRange">
-    <p>Макс. ціна: <span id="priceValue">15000</span> ₴</p>
+</nav>
+<div id="cartModal" class="cart-panel">
+  <div class="cart-header">
+    <h2>Корзина</h2>
+    <span class="close" id="closeCart">&times;</span>
   </div>
+  <ul id="cartItems"></ul>
+  <p id="cartTotal">Сума: 0 грн</p>
+</div>
+  <main>
+    <!-- ===== САЙДБАР ===== -->
+    <aside class="sidebar">
+      <h2>Фільтри</h2>
 
-  <div class="filter-group">
-    <h4>Сортування за ціною</h4>
-    <select id="sort">
-      <option value="default">За замовчуванням</option>
-      <option value="asc">Від дешевих до дорогих</option>
-      <option value="desc">Від дорогих до дешевих</option>
-    </select>
+      <div class="filter-group">
+        <h4>Сортування</h4>
+        <select id="sortSelect">
+          <option value="default">За замовчуванням</option>
+          <option value="asc">Від дешевих до дорогих</option>
+          <option value="desc">Від дорогих до дешевих</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <h4>Категорія</h4>
+        <label><input type="checkbox" class="category" value="Процесори"> Процесори</label>
+        <label><input type="checkbox" class="category" value="Відеокарти"> Відеокарти</label>
+        <label><input type="checkbox" class="category" value="SSD"> SSD</label>
+        <label><input type="checkbox" class="category" value="Материнські плати"> Материнські плати</label>
+        <label><input type="checkbox" class="category" value="Оперативна пам’ять"> Оперативна пам’ять</label>
+      </div>
+
+      <div class="filter-group">
+        <h4>Бренд</h4>
+        <label><input type="checkbox" class="brand" value="Intel"> Intel</label>
+        <label><input type="checkbox" class="brand" value="AMD"> AMD</label>
+        <label><input type="checkbox" class="brand" value="NVIDIA"> NVIDIA</label>
+        <label><input type="checkbox" class="brand" value="ASUS"> ASUS</label>
+        <label><input type="checkbox" class="brand" value="MSI"> MSI</label>
+        <label><input type="checkbox" class="brand" value="Samsung"> Samsung</label>
+      </div>
+
+      <div class="filter-group">
+        <h4>Ціна</h4>
+        <input type="range" id="priceRange" min="0" max="30000" value="30000">
+        <p>До: <span id="priceValue">30000</span> ₴</p>
+      </div>
+
+      <div class="filter-group">
+        <h4>Наявність</h4>
+        <label><input type="checkbox" id="inStock"> В наявності</label>
+      </div>
+    </aside>
+
+    <!-- ===== КОНТЕНТ ===== -->
+    <section class="content">
+      <div class="container" id="productContainer">
+        <!-- Приклад карток -->
+        <!-- ===== КАРТКИ ТОВАРІВ (копіюй у #productContainer) ===== -->
+
+<!-- CPU -->
+<div class="product" data-category="Процесори" data-brand="Intel" data-price="10500" data-stock="true">
+  <img src="https://m.media-amazon.com/images/I/51EwtPjHkIL._AC_SL1280_.jpg" alt="Intel Core i5-12400F">
+  <h3>Процесор Intel Core i5-12400F</h3>
+  <p class="price">10 500 ₴</p>
+  <a href="#" class="btn">У кошик</a>
+</div>
+
+<div class="product" data-category="Процесори" data-brand="Intel" data-price="16200" data-stock="true">
+  <img src="https://img.pccomponentes.com/articles/57/574294/1716-intel-core-i7-12700kf-50-ghz.jpg" alt="Intel Core i7-12700K">
+  <h3>Процесор Intel Core i7-12700K</h3>
+  <p class="price">16 200 ₴</p>
+  <a href="#" class="btn">У кошик</a>
+</div>
+
+<div class="product" data-category="Процесори" data-brand="AMD" data-price="9800" data-stock="true">
+  <img src="https://img.pccomponentes.com/articles/1086/10861341/1164-amd-ryzen-5-5600t-35-45ghz.jpg" alt="AMD Ryzen 5 5600">
+  <h3>Процесор AMD Ryzen 5 5600</h3>
+  <p class="price">9 800 ₴</p>
+  <a href="#" class="btn">У кошик</a>
+</div>
+
+<div class="product" data-category="Процесори" data-brand="AMD" data-price="18500" data-stock="false">
+  <img src="https://m.media-amazon.com/images/I/51hfER1cZVL._AC_SL1500_.jpg" alt="AMD Ryzen 7 7700X">
+  <h3>Процесор AMD Ryzen 7 7700X</h3>
+  <p class="price">18 500 ₴</p>
+  <a href="#" class="btn">У кошик</a>
+</div>
+
+<!-- GPU -->
+<div class="product" data-category="Відеокарти" data-brand="NVIDIA" data-price="23900" data-stock="true">
+  <img src="https://cdn.idealo.com/folder/Product/204006/4/204006491/s10_produktbild_max/asus-geforce-rtx-4060-ti-8g-dual-evo-oc.jpg" alt="GeForce RTX 4060 Ti">
+  <h3>Відеокарта RTX 4060 Ti 8GB</h3>
+  <p class="price">23 900 ₴</p>
+  <a href="#" class="btn">У кошик</a>
+</div>
+
+<div class="product" data-category="Відеокарти" data-brand="NVIDIA" data-price="34900" data-stock="true">
+  <img src="https://m.media-amazon.com/images/I/81w-vR+9voL._AC_SL1500_.jpg" alt="GeForce RTX 4070">
+  <h3>Відеокарта RTX 4070 12GB</h3>
+  <p class="price">34 900 ₴</p>
+  <a href="#" class="btn">У кошик</a>
+</div>
+
+<div class="product" data-category="Відеокарти" data-brand="AMD" data-price="27900" data-stock="false">
+  <img src="https://media.ldlc.com/r1600/ld/products/00/06/09/34/LD0006093434.jpg" alt="Radeon RX 7800 XT">
+  <h3>Відеокарта Radeon RX 7800 XT 16GB</h3>
+  <p class="price">27 900 ₴</p>
+  <a href="#" class="btn">У кошик</a>
+</div>
+
+<!-- Motherboards -->
+<div class="product" data-category="Материнські плати" data-brand="ASUS" data-price="6200" data-stock="true">
+  <img src="https://img.pccomponentes.com/articles/29/299960/155-asus-tuf-gaming-b550-plus.jpg" alt="ASUS TUF Gaming B550-PLUS">
+  <h3>Материнська плата ASUS B550-PLUS</h3>
+  <p class="price">6 200 ₴</p>
+  <a href="#" class="btn">У кошик</a>
+</div>
+
+<div class="product" data-category="Материнські плати" data-brand="MSI" data-price="5400" data-stock="true">
+  <img src="https://thumb.pccomponentes.com/w-530-530/articles/1079/10795599/1123-asus-prime-b660m-a-d4-csm.jpg" alt="MSI PRO B660M-A">
+  <h3>Материнська плата MSI PRO B660M-A</h3>
+  <p class="price">5 400 ₴</p>
+  <a href="#" class="btn">У кошик</a>
+</div>
+
+<!-- RAM -->
+<div class="product" data-category="Оперативна пам’ять" data-brand="Kingston" data-price="2100" data-stock="true">
+  <img src="https://img.pccomponentes.com/articles/43/432664/1392-kingston-fury-beast-ddr4-3200-mhz-16gb-2x8gb-cl16.jpg" alt="Kingston Fury 16GB DDR4 3200">
+  <h3>ОЗП Kingston Fury 16GB DDR4-3200</h3>
+  <p class="price">2 100 ₴</p>
+  <a href="#" class="btn">У кошик</a>
+</div>
+
+<div class="product" data-category="Оперативна пам’ять" data-brand="Corsair" data-price="3950" data-stock="true">
+  <img src="https://thumb.pccomponentes.com/w-530-530/articles/1079/10791037/1513-corsair-vengeance-ddr5-5600mhz-32-gb-2x16gb-cl40.jpg" alt="Corsair Vengeance 32GB DDR5 5600">
+  <h3>ОЗП Corsair 32GB DDR5-5600</h3>
+  <p class="price">3 950 ₴</p>
+  <a href="#" class="btn">У кошик</a>
+</div>
+
+<!-- SSD / HDD -->
+<div class="product" data-category="SSD" data-brand="Samsung" data-price="3200" data-stock="true">
+  <img src="https://thumb.pccomponentes.com/w-530-530/articles/1085/10859847/1724-samsung-990-evo-plus-1tb-disco-ssd-7250mb-s-nvme-pcie-50-x2-nvme-20-nand.jpg" alt="Samsung 980 1TB NVMe">
+  <h3>SSD Samsung 980 1TB NVMe</h3>
+  <p class="price">3 200 ₴</p>
+  <a href="#" class="btn">У кошик</a>
+</div>
+
+<div class="product" data-category="SSD" data-brand="WD" data-price="2650" data-stock="true">
+  <img src="https://m.media-amazon.com/images/I/61kghd2Kj8L._AC_SL1500_.jpg" alt="WD Blue SN570 500GB">
+  <h3>SSD WD Blue SN570 500GB</h3>
+  <p class="price">2 650 ₴</p>
+  <a href="#" class="btn">У кошик</a>
+</div>
+
+<div class="product" data-category="Жорсткі диски" data-brand="Seagate" data-price="2200" data-stock="true">
+  <img src="https://m.media-amazon.com/images/I/71NyznvXLOL._AC_SL1500_.jpg" alt="Seagate Barracuda 2TB">
+  <h3>HDD Seagate Barracuda 2TB</h3>
+  <p class="price">2 200 ₴</p>
+  <a href="#" class="btn">У кошик</a>
+</div>
+
+<!-- PSU -->
+<div class="product" data-category="Блоки живлення" data-brand="Chieftec" data-price="2350" data-stock="true">
+  <img src="https://m.media-amazon.com/images/I/81-16Unm9cL._AC_SL1500_.jpg" alt="Chieftec 650W 80+ Bronze">
+  <h3>Блок живлення 650W 80+ Bronze</h3>
+  <p class="price">2 350 ₴</p>
+  <a href="#" class="btn">У кошик</a>
+</div>
+
+<div class="product" data-category="Блоки живлення" data-brand="Seasonic" data-price="3990" data-stock="false">
+  <img src="https://media.ldlc.com/r1600/ld/products/00/06/05/16/LD0006051636.jpg" alt="Seasonic Focus 750W Gold">
+  <h3>Блок живлення 750W 80+ Gold</h3>
+  <p class="price">3 990 ₴</p>
+  <a href="#" class="btn">У кошик</a>
+</div>
+
+<!-- Cases -->
+<div class="product" data-category="Корпуси" data-brand="NZXT" data-price="2890" data-stock="true">
+  <img src="https://media.ldlc.com/r1600/ld/products/00/06/18/00/LD0006180043.jpg" alt="NZXT H5 Flow">
+  <h3>Корпус NZXT H5 Flow</h3>
+  <p class="price">2 890 ₴</p>
+  <a href="#" class="btn">У кошик</a>
+</div>
+
+<div class="product" data-category="Корпуси" data-brand="Deepcool" data-price="1990" data-stock="true">
+  <img src="https://shop.akinformatica.it/wp-content/uploads/2024/04/prd_img_27602.jpg" alt="Deepcool Matrexx 55">
+  <h3>Корпус Deepcool Matrexx 55</h3>
+  <p class="price">1 990 ₴</p>
+  <a href="#" class="btn">У кошик</a>
+</div>
+
+<!-- Cooling -->
+<div class="product" data-category="Охолодження" data-brand="Cooler Master" data-price="1250" data-stock="true">
+  <img src="https://m.media-amazon.com/images/I/81WN7UjlKgL._SL1500_.jpg" alt="Cooler Master Hyper 212">
+  <h3>Кулер Hyper 212</h3>
+  <p class="price">1 250 ₴</p>
+  <a href="#" class="btn">У кошик</a>
+</div>
+
+<div class="product" data-category="Охолодження" data-brand="be quiet!" data-price="3490" data-stock="true">
+  <img src="https://m.media-amazon.com/images/I/61WdPN8tH4L._SL1500_.jpg" alt="be quiet! Pure Loop 240">
+  <h3>СВО be quiet! Pure Loop 240</h3>
+  <p class="price">3 490 ₴</p>
+  <a href="#" class="btn">У кошик</a>
+</div>
+
+<!-- Monitors & Peripherals -->
+<div class="product" data-category="Монітори" data-brand="ASUS" data-price="9450" data-stock="true">
+  <img src="https://media.ldlc.com/r705/ld/products/00/06/25/28/LD0006252859.jpg" alt="ASUS 27 IPS 144Hz">
+  <h3>Монітор 27″ IPS 144Hz</h3>
+  <p class="price">9 450 ₴</p>
+  <a href="#" class="btn">У кошик</a>
+</div>
+
+<div class="product" data-category="Клавіатури" data-brand="Logitech" data-price="1850" data-stock="true">
+  <img src="https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_103638372?x=1800&y=1800&format=jpg&quality=80&sp=yes&strip=yes&trim&ex=1800&ey=1800&align=center&resizesource&unsharp=1.5x1+0.7+0.02&cox=0&coy=0&cdx=1800&cdy=1800" alt="Logitech G413">
+  <h3>Механічна клавіатура Logitech</h3>
+  <p class="price">1 850 ₴</p>
+  <a href="#" class="btn">У кошик</a>
+</div>
+
+<div class="product" data-category="Миші" data-brand="Razer" data-price="1490" data-stock="true">
+  <img src="https://media.ldlc.com/r705/ld/products/00/05/87/94/LD0005879428_1.jpg" alt="Razer Basilisk RGB">
+  <h3>Ігрова миша Razer RGB</h3>
+  <p class="price">1 490 ₴</p>
+  <a href="#" class="btn">У кошик</a>
+</div>
+
+<div class="product" data-category="Навушники" data-brand="HyperX" data-price="2290" data-stock="true">
+  <img src="https://assets.mmsrg.com/isr/166325/c1/-/ASSET_MMS_135671297?x=536&y=402&format=jpg&quality=80&sp=yes&strip=yes&trim&ex=536&ey=402&align=center&resizesource&unsharp=1.5x1+0.7+0.02&cox=0&coy=0&cdx=536&cdy=402" alt="HyperX Cloud II">
+  <h3>Навушники HyperX Cloud II</h3>
+  <p class="price">2 290 ₴</p>
+  <a href="#" class="btn">У кошик</a>
+</div>
+<div class="product" data-category="Навушники" data-brand="HyperX" data-price="2290" data-stock="true">
+  <img src="https://m.media-amazon.com/images/I/71ltsViEA8L._AC_SL1500_.jpg">
+  <h3>Навушники HyperX Cloud I</h3>
+  <p class="price">2 290 ₴</p>
+  <a href="#" class="btn">У кошик</a>
+</div>
+<!-- Wi-Fi адаптери -->
+<div class="product" data-category="Wi-Fi адаптери" data-brand="TP-Link" data-price="750" data-stock="true">
+  <img src="https://www.overly.it/656004-thickbox_default/tp-link-archer-t3u-wlan-1267-mbit-s.jpg" alt="Wi-Fi адаптер">
+  <h3>Wi-Fi адаптер TP-Link</h3>
+  <p class="price">750 ₴</p>
+  <a href="#" class="btn">У кошик</a>
+</div>
+<div class="product" data-category="Wi-Fi адаптери" data-brand="ASUS" data-price="1100" data-stock="true">
+  <img src="https://m.media-amazon.com/images/I/61Vcgjk3d1L._AC_SL1500_.jpg" alt="Wi-Fi адаптер ASUS">
+  <h3>Wi-Fi адаптер ASUS Dual-Band</h3>
+  <p class="price">1 100 ₴</p>
+  <a href="#" class="btn">У кошик</a>
+</div>
+
+<!-- Вентилятори -->
+<div class="product" data-category="Вентилятори" data-brand="Generic" data-price="450" data-stock="true">
+  <img src="https://media.ldlc.com/r1600/ld/products/00/06/19/13/LD0006191337.jpg" alt="Вентилятор 120 мм">
+  <h3>Вентилятор 120 мм з LED</h3>
+  <p class="price">450 ₴</p>
+  <a href="#" class="btn">У кошик</a>
+</div>
+<div class="product" data-category="Вентилятори" data-brand="Noctua" data-price="800" data-stock="true">
+  <img src="https://m.media-amazon.com/images/I/71HSVNrcdWL._AC_SL1500_.jpg" alt="Вентилятор Noctua">
+  <h3>Вентилятор Noctua 120 мм</h3>
+  <p class="price">800 ₴</p>
+  <a href="#" class="btn">У кошик</a>
+</div>
+
+<!-- Термопасти -->
+<div class="product" data-category="Термопаста" data-brand="Arctic" data-price="320" data-stock="true">
+  <img src="https://media.ldlc.com/r1600/ld/products/00/06/19/01/LD0006190132.jpg" alt="Термопаста Arctic MX-4">
+  <h3>Термопаста Arctic MX-4</h3>
+  <p class="price">320 ₴</p>
+  <a href="#" class="btn">У кошик</a>
+</div>
+<div class="product" data-category="Термопаста" data-brand="Cooler Master" data-price="280" data-stock="true">
+  <img src="https://m.media-amazon.com/images/I/61-25-dcRsL._AC_SL1500_.jpg" alt="Термопаста Cooler Master MasterGel">
+  <h3>Термопаста Cooler Master MasterGel</h3>
+  <p class="price">280 ₴</p>
+  <a href="#" class="btn">У кошик</a>
+</div>
+
+<!-- Веб-камери -->
+<div class="product" data-category="Веб-камери" data-brand="Logitech" data-price="1200" data-stock="true">
+  <img src="https://m.media-amazon.com/images/I/71eGb1FcyiL._AC_SL1500_.jpg" alt="Logitech C270 Webcam">
+  <h3>Веб-камера Logitech C270 HD</h3>
+  <p class="price">1 200 ₴</p>
+  <a href="#" class="btn">У кошик</a>
+</div>
+<div class="product" data-category="Веб-камери" data-brand="A4Tech" data-price="1400" data-stock="true">
+  <img src="https://m.media-amazon.com/images/I/51gEoIixgJL._AC_SL1500_.jpg" alt="A4Tech Full HD Webcam">
+  <h3>Веб-камера A4Tech Full HD</h3>
+  <p class="price">1 400 ₴</p>
+  <a href="#" class="btn">У кошик</a>
+</div>
+<div class="product" data-category="Веб-камери" data-brand="Razer" data-price="3500" data-stock="true">
+  <img src="https://m.media-amazon.com/images/I/614YfiGJDlL._AC_SL1500_.jpg" alt="Razer Kiyo Webcam">
+  <h3>Веб-камера Razer Kiyo (з підсвіткою)</h3>
+  <p class="price">3 500 ₴</p>
+  <a href="#" class="btn">У кошик</a>
+</div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <!-- FAQ модальне вікно -->
+<div id="faqModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>FAQ — Часті питання</h2>
+
+    <div class="faq-item">
+      <button class="faq-question">🚚 Як здійснюється доставка?</button>
+      <div class="faq-answer">
+        <p>Ми співпрацюємо з Новою Поштою та Укрпоштою. Термін доставки — 1–3 дні.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">💳 Які способи оплати доступні?</button>
+      <div class="faq-answer">
+        <p>Ви можете оплатити картою онлайн або при отриманні (накладений платіж).</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">🛡 Чи є гарантія на товари?</button>
+      <div class="faq-answer">
+        <p>Так, на всі товари надається гарантія від 12 місяців до 36 місяців залежно від виробника.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question">📦 Чи можна повернути товар?</button>
+      <div class="faq-answer">
+        <p>Так, протягом 14 днів після покупки, якщо товар не був у використанні.</p>
+      </div>
+    </div>
   </div>
 </div>
 
-  <main class="container" id="products">
-    <div class="product">
-      <img src="https://content.rozetka.com.ua/goods/images/big/397444905.jpg" alt="CPU">
-      <h3>Процесор Intel i7</h3>
-      <p class="price">10 500 ₴</p>
-      <a href="#" class="btn">У кошик</a>
+  <!-- ===== FOOTER ===== -->
+<footer>
+  <div class="footer-container">
+    <div class="footer-about">
+      <h3>Про нас</h3>
+      <p>Ми спеціалізуємося на продажу компʼютерних комплектуючих та аксесуарів. 
+      Якість і швидка доставка гарантовані.</p>
     </div>
+    <div class="footer-links">
+      <h3>Швидкі посилання</h3>
+      <ul>
+        <li><a href="#">Головна</a></li>
+        <li><a href="#" id="faqBtn">FAQ</a></li>
+        <li><a href="#" id="contactBtn">Контакти</a></li>
+      </ul>
+    </div>
+    <div class="footer-social">
+      <h3>Ми в соцмережах</h3>
+      <a href="#"><img src="https://www.svgrepo.com/show/494341/facebook.svg" alt="Facebook"></a>
+      <a href="#"><img src="https://www.svgrepo.com/show/262926/telegram.svg" alt="Instagram"></a>
+      <a href="#"><img src="https://www.svgrepo.com/show/506668/instagram.svg" alt="Telegram"></a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Всі права захищені | Computer Shop</p>
+  </div>
+</footer>
 
-    <div class="product">
-      <img src="https://content.rozetka.com.ua/goods/images/big/590276666.jpg" alt="GPU">
-      <h3>Відеокарта RTX 4070</h3>
-      <p class="price">28 900 ₴</p>
-      <a href="#" class="btn">У кошик</a>
-    </div>
 
-    <div class="product">
-      <img src="https://m.media-amazon.com/images/I/A1sHjPpz6fL._AC_UL640_FMwebp_QL65_.jpg" alt="SSD">
-      <h3>SSD Samsung 1TB</h3>
-      <p class="price">3 200 ₴</p>
-      <a href="#" class="btn">У кошик</a>
-    </div>
 
-    <div class="product">
-      <img src="https://content1.rozetka.com.ua/goods/images/big/462444987.jpg" alt="PSU">
-      <h3>Блок живлення 650W</h3>
-      <p class="price">2 500 ₴</p>
-      <a href="#" class="btn">У кошик</a>
-    </div>  
+<!-- Контакти -->
+<div id="contactModal" class="modal">
+  <div class="modal-content">
+    <span id="closeContact" class="close">&times;</span>
+    <h2>Контакти</h2>
+    <p>Хочете співпрацювати з нами?</p>
+    <p>📧 Email: support@pcshop.com</p>
+    <p>📞 Телефон: +380 67 123 45 67</p>
+    <p>🏢 Адреса: Київ, вул. Техно 12</p>
+  </div>
+</div>
+<!-- Панель корзини -->
+<div id="cartModal" class="cart-panel">
+  <div class="cart-header">
+    <h2>Корзина</h2>
+    <span class="close" id="closeCart">&times;</span>
+  </div>
+  <ul id="cartItems"></ul>
+  <p id="cartTotal">Сума: 0 грн</p>
+</div>
 
-    <div class="product">
-      <img src="https://content2.rozetka.com.ua/goods/images/big_tile/25228755.png" alt="Motherboard">
-      <h3>Материнська плата ASUS B550</h3>
-      <p class="price">5 800 ₴</p>
-      <a href="#" class="btn">У кошик</a>
-    </div>
-   
-    <div class="product">
-      <img src="https://m.media-amazon.com/images/I/719RKrjaQqL._AC_UL640_FMwebp_QL65_.jpg" alt="RAM">
-      <h3>Оперативна пам'ять 16GB DDR4</h3>
-      <p class="price">2 700 ₴</p>
-      <a href="#" class="btn">У кошик</a>
-    </div>
-    
-    <div class="product">
-      <img src="https://content.rozetka.com.ua/goods/images/big_tile/310426279.jpg" alt="Case">
-      <h3>Корпус ATX з підсвіткою</h3>
-      <p class="price">2 200 ₴</p>
-      <a href="#" class="btn">У кошик</a>
-    </div>
-  
-    <div class="product">
-      <img src="https://media.ldlc.com/r705/ld/products/00/06/26/77/LD0006267720.jpg" alt="Cooler">
-      <h3>Система охолодження Cooler Master</h3>
-      <p class="price">1 400 ₴</p>
-      <a href="#" class="btn">У кошик</a>
-    </div>
-  
-    <div class="product">
-      <img src="https://m.media-amazon.com/images/I/71XJddtuqmL._AC_UL640_FMwebp_QL65_.jpg" alt="Monitor">
-      <h3>Монітор 27″ IPS 144Hz</h3>
-      <p class="price">9 500 ₴</p>
-      <a href="#" class="btn">У кошик</a>
-    </div>
- 
-    <div class="product">
-      <img src="https://content1.rozetka.com.ua/goods/images/big/545376638.png" alt="Keyboard">
-      <h3>Механічна клавіатура</h3>
-      <p class="price">1 800 ₴</p>
-      <a href="#" class="btn">У кошик</a>
-    </div>
- 
-    <div class="product">
-      <img src="https://img.kwcdn.com/product/fancy/486698e4-2b9d-4e0a-9a8b-0dedac9ed296.jpg?imageView2/2/w/800/q/70/format/webp" alt="Mouse">
-      <h3>Ігрова миша RGB</h3>
-      <p class="price">1 200 ₴</p>
-      <a href="#" class="btn">У кошик</a>
-    </div>
-  </main>
-
-  <footer>
-    <p>© 2025 Магазин комплектуючих ПК. Всі права захищено.</p>
-  </footer>
+  <script src="script.js"></script>
 </body>
-<script>
-// ======= Елементи =======
-const searchInput = document.getElementById("search");
-const sortSelect = document.getElementById("sort");
-const priceRange = document.getElementById("priceRange");
-const priceValue = document.getElementById("priceValue");
-const checkboxes = document.querySelectorAll(".sidebar input[type=checkbox]");
-const productContainer = document.getElementById("products");
-const productCards = Array.from(productContainer.querySelectorAll(".product"));
-
-// ======= Події =======
-searchInput.addEventListener("keyup", renderProducts);
-sortSelect.addEventListener("change", renderProducts);
-priceRange.addEventListener("input", () => {
-  priceValue.textContent = priceRange.value;
-  renderProducts();
-});
-checkboxes.forEach(ch => ch.addEventListener("change", renderProducts));
-
-// ======= Основна функція =======
-function renderProducts() {
-  let query = searchInput.value.toLowerCase();
-  let selectedCategories = Array.from(checkboxes)
-    .filter(ch => ch.checked)
-    .map(ch => ch.value.toLowerCase());
-
-  let maxPrice = parseInt(priceRange.value);
-
-  // Фільтрація
-  productCards.forEach(product => {
-    let name = product.querySelector("h3").textContent.toLowerCase();
-    let price = parseInt(product.querySelector(".price").textContent.replace(/\D/g, ""));
-
-    let matchesSearch = name.includes(query);
-    let matchesCategory = selectedCategories.length === 0 || 
-                          selectedCategories.some(cat => name.includes(cat));
-    let matchesPrice = price <= maxPrice;
-
-    if (matchesSearch && matchesCategory && matchesPrice) {
-      product.style.display = "flex";  // показати картку
-    } else {
-      product.style.display = "none";  // сховати
-    }
-  });
-
-  // Сортування тільки серед тих, що відображаються
-  let visibleProducts = productCards.filter(p => p.style.display !== "none");
-
-  if (sortSelect.value === "asc") {
-    visibleProducts.sort((a, b) => {
-      return parseInt(a.querySelector(".price").textContent.replace(/\D/g, "")) -
-             parseInt(b.querySelector(".price").textContent.replace(/\D/g, ""));
-    });
-  } else if (sortSelect.value === "desc") {
-    visibleProducts.sort((a, b) => {
-      return parseInt(b.querySelector(".price").textContent.replace(/\D/g, "")) -
-             parseInt(a.querySelector(".price").textContent.replace(/\D/g, ""));
-    });
-  }
-
-  // Переставляємо товари в контейнер
-  visibleProducts.forEach(product => productContainer.appendChild(product));
-}
-
-// ======= Запуск при завантаженні =======
-renderProducts();
-
-</script>
 </html>
